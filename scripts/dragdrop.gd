@@ -22,9 +22,11 @@ func _on_Area2D_input_event(_viewport, event, _shape_idx):
 func _physics_process(delta):
 	if dragging:
 		position = get_global_mouse_position() - pos_from_centre
+	else:
+		position = lerp(position, start_pos, 10*delta)
 
 func _input(event):
 	if event.is_action_released("LClick"): 
 		dragging = false
 		pos_from_centre = Vector2()
-		position = start_pos
+		
