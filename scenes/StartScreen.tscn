@@ -34,6 +34,6 @@ anchor_bottom = 0.3
 margin_right = 400.0
 margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 2 )
-text = "Untitled Jam Game"
+text = "Far From Closed"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
