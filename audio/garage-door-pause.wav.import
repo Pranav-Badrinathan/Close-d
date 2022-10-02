@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/garage-door-pause.wav-67e5b97c5d6aa1b310e4be4426e46963.sample"
+
+[deps]
+
+source_file="res://audio/garage-door-pause.wav"
+dest_files=[ "res://.import/garage-door-pause.wav-67e5b97c5d6aa1b310e4be4426e46963.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

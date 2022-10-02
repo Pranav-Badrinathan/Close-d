@@ -6,6 +6,7 @@ onready var door = get_node("Door")
 onready var light = get_node("Machine/MachineSprite/Light")
 onready var time_readout = get_node("TimeReadout")
 onready var machine = get_node("Machine")
+onready var audio = get_node("Audio")
 
 var door_state = State.OPEN
 var door_progress = 0
@@ -14,6 +15,9 @@ var peak_progress = 1
 var time_until_open = 10
 var time_until_fall = 1
 
+signal door_start
+signal door_end
+signal stop
 
 export var door_speed = 10
 export (Texture) var light_on
@@ -30,6 +34,10 @@ func _ready():
 	door_interval = [0, door.texture.get_size().y * door.transform.get_scale().y]
 	light.texture = light_off
 	time_readout.visible = false
+	
+	self.connect("door_start", audio, "play_door_start")
+	self.connect("door_end", audio, "play_door_end")
+	self.connect("stop", audio, "play_stop")
 	
 func _process(d):
 	if not first_closing:
@@ -72,15 +80,18 @@ func start_timer():
 func opening_to_open():
 	door_state = State.OPEN
 	light.texture = light_off
+	emit_signal("stop")
 
 func start_opening():
 	door_state = State.OPENING
 	light.texture = light_on
 	peak_progress = door_progress
+	emit_signal("door_end")
 
 func start_closing():
 	door_state = State.CLOSING
 	light.texture = light_on
+	emit_signal("door_start")
 
 func _on_OpenButton_pressed():
 	if door_state == State.OPEN:

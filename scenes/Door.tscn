@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/light_on.png" type="Texture" id=1]
 [ext_resource path="res://mask.png" type="Texture" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://sprites/green_button.png" type="Texture" id=7]
 [ext_resource path="res://sprites/machine.png" type="Texture" id=8]
 [ext_resource path="res://sprites/light_off.png" type="Texture" id=9]
+[ext_resource path="res://scripts/door_audio.gd" type="Script" id=10]
+[ext_resource path="res://audio/garage-door-pause.wav" type="AudioStream" id=11]
+[ext_resource path="res://audio/garage-door-end.wav" type="AudioStream" id=12]
+[ext_resource path="res://audio/garage-door-startmain.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 221, 48.5 )
@@ -91,5 +95,11 @@ position = Vector2( -200, 780 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 4 )
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource( 10 )
+door_start = ExtResource( 13 )
+door_pause = ExtResource( 11 )
+door_end = ExtResource( 12 )
 
 [connection signal="pressed" from="OpenButton" to="." method="_on_OpenButton_pressed"]
