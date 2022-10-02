@@ -98,7 +98,6 @@ func _on_OpenButton_pressed():
 		if first_closing:
 			start_timer()
 		start_closing()
-		break_machine()
 		
 func break_machine():
 	machine.gravity_scale = 50
