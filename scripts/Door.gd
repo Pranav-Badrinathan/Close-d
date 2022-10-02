@@ -3,7 +3,7 @@ extends Node2D
 enum State {OPEN, CLOSING, OPENING}
 
 onready var door = get_node("Door")
-onready var light = get_node("Light")
+onready var light = get_node("Machine/Light")
 onready var time_readout = get_node("TimeReadout")
 
 var door_state = State.OPEN
@@ -13,6 +13,8 @@ var peak_progress = 1
 var time_until_open = 10
 
 export var door_speed = 10
+export (Texture) var light_on
+export (Texture) var light_off
 
 var open_speed = 1
 var close_speed = 0.09
@@ -21,7 +23,7 @@ var first_closing = true
 
 func _ready():
 	door_interval = [0, door.texture.get_size().y * door.transform.get_scale().y]
-	light.visible = false
+	light.texture = light_off
 	time_readout.visible = false
 	
 func _process(d):
@@ -54,16 +56,16 @@ func start_timer():
 
 func opening_to_open():
 	door_state = State.OPEN
-	light.visible = false
+	light.texture = light_off
 
 func start_opening():
 	door_state = State.OPENING
-	light.visible = true
+	light.texture = light_on
 	peak_progress = door_progress
 
 func start_closing():
 	door_state = State.CLOSING
-	light.visible = true
+	light.texture = light_on
 
 func _on_OpenButton_pressed():
 	if door_state == State.OPEN:
