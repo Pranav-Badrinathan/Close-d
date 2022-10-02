@@ -20,5 +20,5 @@ position = Vector2( 150, 1020 )
 
 [node name="Area2D" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1800, 775 )
-_tool = 2
+_tool = 1
 image = ExtResource( 4 )

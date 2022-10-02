@@ -39,6 +39,7 @@ func _ready():
 	self.connect("door_end", audio, "play_door_end")
 	self.connect("stop", audio, "play_stop")
 	
+	
 func _process(d):
 	if not first_closing:
 		time_until_open -= d

@@ -4,7 +4,7 @@ var dragging = false
 var pos_from_centre = Vector2()
 var start_pos = Vector2()
 
-enum Tool {SCREWDRIVER, WRENCH, SLEDGEHAMMER, PLIERS}
+enum Tool {SCREWDRIVER, SLEDGEHAMMER, WRENCH, PLIERS}
 export (Tool) var _tool
 
 export (Texture) var image
@@ -31,8 +31,11 @@ func _physics_process(delta):
 	else:
 		position = lerp(position, start_pos, 10*delta)
 
+var once = false
 func _input(event):
-	if event.is_action_released("LClick"): 
-		dragging = false
-		pos_from_centre = Vector2()
+	if event is InputEventMouseButton:
+		if event.is_action_released("LClick"): 
+			dragging = false
+			pos_from_centre = Vector2()
+			EventRegistery.emit_drag_action(position, _tool)
 		

@@ -2,7 +2,9 @@ extends Node2D
 
 
 export(bool) var debug := false
+export var tool_n = 0
 
+signal breakM
 
 var width: float = 100
 var height: float = 100
@@ -39,8 +41,12 @@ func is_in_range(global_pos: Vector2) -> bool:
 
 
 func is_right_tool(tool_name: int) -> bool:
-	return 0 == tool_name
+	return tool_n == tool_name
 
+
+func _ready():
+	self.connect("breakM", get_node("../.."), "break_machine")
+	
 
 func _react(_pos, _tool):
-	print("_react not overwritten.")
+	emit_signal("breakM")
