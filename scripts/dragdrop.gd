@@ -4,13 +4,19 @@ var dragging = false
 var pos_from_centre = Vector2()
 var start_pos = Vector2()
 
-enum Tool {SCREWDRIVER, WRENCH, SLEDGEHAMMER, PLIERS, AXE}
+enum Tool {SCREWDRIVER, WRENCH, SLEDGEHAMMER, PLIERS}
 export (Tool) var _tool
 
 export (Texture) var image
 
 func _ready():
 	get_node("Texture").set_texture(image)
+	
+	var collider = get_node("Collider")
+	var text = get_node("Texture")
+	collider.scale.x = image.get_size().x * text.scale.x
+	collider.scale.y = image.get_size().y * text.scale.y
+	
 	start_pos = position
 
 func _on_Area2D_input_event(_viewport, event, _shape_idx):

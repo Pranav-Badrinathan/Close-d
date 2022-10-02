@@ -2,8 +2,7 @@ extends Node2D
 
 enum State {OPEN, CLOSING, OPENING}
 
-onready var door = get_node("Fore/Door")
-onready var foreground = get_node("Fore")
+onready var door = get_node("Door")
 onready var light = get_node("Light")
 onready var time_readout = get_node("TimeReadout")
 
