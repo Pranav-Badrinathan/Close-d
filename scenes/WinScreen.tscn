@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Theme.tres" type="Theme" id=1]
+
+[node name="WinScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.764706, 0.121569, 0.121569, 1 )
+
+[node name="Label" type="Label" parent="ColorRect"]
+anchor_right = 1.0
+margin_top = 339.0
+margin_bottom = 467.0
+theme = ExtResource( 1 )
+text = "YOU CLOSED the door!!"
+align = 1

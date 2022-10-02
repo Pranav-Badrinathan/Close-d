@@ -67,6 +67,11 @@ func _process(d):
 					emit_signal("door_slam")
 				done = false
 			door.position.y = door_interval[0] + (door_interval[1] - door_interval[0]) * door_progress
+		if time_until_fall <= -4:
+			get_tree().get_root().add_child(load("res://scenes/WinScreen.tscn").instance())
+			get_parent().hide()
+			
+
 		
 	elif door_state == State.CLOSING:
 		door_progress += close_speed * d
