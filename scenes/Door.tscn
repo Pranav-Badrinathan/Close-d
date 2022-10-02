@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sprites/light_on.png" type="Texture" id=1]
 [ext_resource path="res://mask.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://audio/GI-jam-metal_smash-effect.wav" type="AudioStream" id=14]
 [ext_resource path="res://scripts/MachineAudio.gd" type="Script" id=15]
 [ext_resource path="res://scenes/DragTarget.tscn" type="PackedScene" id=16]
+[ext_resource path="res://audio/GI_Jam_FarFromClose10s-25n10.wav" type="AudioStream" id=17]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 221, 48.5 )
@@ -67,8 +68,9 @@ texture = ExtResource( 8 )
 position = Vector2( -16, 10 )
 
 [node name="MachineAudio" type="AudioStreamPlayer2D" parent="Machine"]
-stream = ExtResource( 14 )
 script = ExtResource( 15 )
+break_ = ExtResource( 14 )
+music_ = ExtResource( 17 )
 
 [node name="Node2D" parent="Machine" instance=ExtResource( 16 )]
 position = Vector2( -42, -18 )
@@ -116,3 +118,4 @@ door_pause = ExtResource( 11 )
 door_end = ExtResource( 12 )
 
 [connection signal="pressed" from="OpenButton" to="." method="_on_OpenButton_pressed"]
+[connection signal="pressed" from="OpenButton" to="Machine/MachineAudio" method="_play2"]
