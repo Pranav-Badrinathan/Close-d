@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://sprites/light_on.png" type="Texture" id=1]
 [ext_resource path="res://mask.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://audio/garage-door-pause.wav" type="AudioStream" id=11]
 [ext_resource path="res://audio/garage-door-end.wav" type="AudioStream" id=12]
 [ext_resource path="res://audio/garage-door-startmain.wav" type="AudioStream" id=13]
+[ext_resource path="res://audio/GI-jam-metal_smash-effect.wav" type="AudioStream" id=14]
+[ext_resource path="res://scripts/MachineAudio.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 221, 48.5 )
@@ -62,6 +64,10 @@ texture = ExtResource( 8 )
 
 [node name="Light" type="Sprite" parent="Machine/MachineSprite"]
 position = Vector2( -16, 10 )
+
+[node name="MachineAudio" type="AudioStreamPlayer2D" parent="Machine"]
+stream = ExtResource( 14 )
+script = ExtResource( 15 )
 
 [node name="OpenButton" type="TextureButton" parent="."]
 margin_left = 580.0
