@@ -15,8 +15,11 @@ var peak_progress = 1
 var time_until_open = 10
 var time_until_fall = 1
 
+var done = true
+
 signal door_start
 signal door_end
+signal door_slam
 signal stop
 
 export var door_speed = 10
@@ -37,6 +40,7 @@ func _ready():
 	
 	self.connect("door_start", audio, "play_door_start")
 	self.connect("door_end", audio, "play_door_end")
+	self.connect("door_slam", audio, "play_door_slam")
 	self.connect("stop", audio, "play_stop")
 	
 	
@@ -59,6 +63,9 @@ func _process(d):
 			if door_progress >= 1:
 				door_progress = 1
 				#you win
+				if done == true:
+					emit_signal("door_slam")
+				done = false
 			door.position.y = door_interval[0] + (door_interval[1] - door_interval[0]) * door_progress
 		
 	elif door_state == State.CLOSING:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sprites/light_on.png" type="Texture" id=1]
 [ext_resource path="res://mask.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scripts/MachineAudio.gd" type="Script" id=15]
 [ext_resource path="res://scenes/DragTarget.tscn" type="PackedScene" id=16]
 [ext_resource path="res://audio/GI_Jam_FarFromClose10s-25n10.wav" type="AudioStream" id=17]
+[ext_resource path="res://audio/garage-door-slam.wav" type="AudioStream" id=18]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 221, 48.5 )
@@ -116,6 +117,7 @@ script = ExtResource( 10 )
 door_start = ExtResource( 13 )
 door_pause = ExtResource( 11 )
 door_end = ExtResource( 12 )
+door_slam = ExtResource( 18 )
 
 [connection signal="pressed" from="OpenButton" to="." method="_on_OpenButton_pressed"]
 [connection signal="pressed" from="OpenButton" to="Machine/MachineAudio" method="_play2"]
