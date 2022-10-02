@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/light_on.png" type="Texture" id=1]
 [ext_resource path="res://mask.png" type="Texture" id=2]
@@ -10,9 +10,18 @@
 [ext_resource path="res://sprites/machine.png" type="Texture" id=8]
 [ext_resource path="res://sprites/light_off.png" type="Texture" id=9]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 221, 48.5 )
+
 [sub_resource type="DynamicFont" id=1]
 size = 28
 font_data = ExtResource( 6 )
+
+[sub_resource type="LineShape2D" id=3]
+normal = Vector2( -0.316228, -0.948683 )
+
+[sub_resource type="LineShape2D" id=4]
+normal = Vector2( 0.323144, -0.94635 )
 
 [node name="Door" type="Node2D"]
 script = ExtResource( 3 )
@@ -26,20 +35,29 @@ texture = ExtResource( 2 )
 mode = 3
 range_item_cull_mask = 2
 
-[node name="Machine" type="Sprite" parent="."]
-position = Vector2( 0, -150 )
-scale = Vector2( 7.5, 7.5 )
-texture = ExtResource( 8 )
-
-[node name="Light" type="Sprite" parent="Machine"]
-position = Vector2( -16, 10 )
-
 [node name="Door" type="Sprite" parent="."]
 light_mask = 2
 scale = Vector2( 10, 10 )
 texture = ExtResource( 5 )
 centered = false
 offset = Vector2( -48, -64 )
+
+[node name="Machine" type="RigidBody2D" parent="."]
+position = Vector2( 0, -150 )
+gravity_scale = 0.0
+can_sleep = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Machine"]
+position = Vector2( 0, 16 )
+scale = Vector2( 0.998, 0.998 )
+shape = SubResource( 2 )
+
+[node name="MachineSprite" type="Sprite" parent="Machine"]
+scale = Vector2( 7.5, 7.5 )
+texture = ExtResource( 8 )
+
+[node name="Light" type="Sprite" parent="Machine/MachineSprite"]
+position = Vector2( -16, 10 )
 
 [node name="OpenButton" type="TextureButton" parent="."]
 margin_left = 580.0
@@ -61,5 +79,17 @@ rect_scale = Vector2( 6, 6 )
 custom_colors/font_color = Color( 0.792157, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "s"
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 200, 800 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( -200, 780 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 4 )
 
 [connection signal="pressed" from="OpenButton" to="." method="_on_OpenButton_pressed"]
