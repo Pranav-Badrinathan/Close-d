@@ -8,15 +8,13 @@ onready var light = get_node("Light")
 onready var time_readout = get_node("TimeReadout")
 
 var door_state = State.OPEN
-
 var door_progress = 0
-
-var open_speed = 1
-
-var close_speed = 0.09
-
 var door_interval
 
+export var door_speed = 10
+
+var open_speed_mod = 1
+var close_speed_mod = 0.09
 var time_until_open = 10
 
 var first_closing = true
@@ -26,9 +24,9 @@ func _ready():
 	light.visible = false
 	time_readout.visible = false
 	
-func _process(d):
+func _process(delta):
 	if not first_closing:
-		time_until_open -= d
+		time_until_open -= delta
 		
 		time_readout.text = str(floor(time_until_open)) + ":" + str(floor((time_until_open - floor(time_until_open)) / 0.01))
 	
@@ -38,15 +36,17 @@ func _process(d):
 		time_until_open = 10
 		
 	elif door_state == State.CLOSING:
-		door_progress += close_speed * d
+		door_progress += close_speed_mod * delta
 		door.position.y = door_interval[0] + (door_interval[1] - door_interval[0]) * door_progress
 		
 	elif door_state == State.OPENING:
-		door_progress -= open_speed * d
+		door_progress -= open_speed_mod * delta
 		if door_progress <= 0:
 			door_progress = 0
 			opening_to_open()
-		door.position.y = door_interval[0] + (door_interval[1] - door_interval[0]) / (1 + pow(2, -20 * (door_progress - 0.5)))
+		
+		door.position.y = lerp(door_interval[1] * door_progress, door_interval[0], door_speed* open_speed_mod*delta)
+#		door.position.y = door_interval[0] + (door_interval[1] - door_interval[0]) / (1 + pow(2, -20 * (door_progress - 0.5)))
 
 func start_timer():
 	time_readout.visible = true
