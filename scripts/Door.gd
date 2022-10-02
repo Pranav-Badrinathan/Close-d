@@ -98,8 +98,9 @@ func _on_OpenButton_pressed():
 		if first_closing:
 			start_timer()
 		start_closing()
-		
+
 func break_machine():
+	get_node("Machine/MachineAudio")._play()
 	machine.gravity_scale = 50
 	light.texture = light_off
 	door_state = State.FALLING
